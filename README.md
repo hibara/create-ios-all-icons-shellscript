@@ -15,7 +15,7 @@ When that does not work, check the permissions of the directory where the shell 
 This Shell Script creates other output directory in the directory where is own script.
 You will need to give write permission there. Also, you will need execute permission of as its own script.
 
-たとえば、以下のようにコンソールから指定してください。
+たとえば、以下のようにコンソールから指定してください。    
 For example, input command from the console as follows.
 
 ```sh
