@@ -5,6 +5,14 @@ Use Shell Script commands in only MacOSX for generating all icons that need to b
 MacOSXに最初から入っているコマンドを使い、1024x1024（または512x512）サイズから、
 シェルスクリプトを使って、iOSアプリに必要なすべてのサイズのアイコンファイルを生成します。
 
+## with Android icons
+
+せっかくなので、iOSアプリアイコンを生成するついでに、Androidアイコンも生成するシェルスクリプトを別途追加しました。
+https://github.com/hibara/create-ios-all-icons-shellscript/blob/master/create_ios_and_android_icons.command
+
+Added Shell Script that generates even Android icons with the iOS app icons.
+
+
 # When that does not work...
 
 スクリプトがうまく実行されない場合は、シェルスクリプトが実行されるディレクトリの権限を確認してください。
