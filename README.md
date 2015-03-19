@@ -8,6 +8,7 @@ MacOSXに最初から入っているコマンドを使い、1024x1024（また�
 ## with Android icons
 
 せっかくなので、iOSアプリアイコンを生成するついでに、Androidアイコンも生成するシェルスクリプトを別途追加しました。
+
 https://github.com/hibara/create-ios-all-icons-shellscript/blob/master/create_ios_and_android_icons.command
 
 Added Shell Script that generates even Android icons with the iOS app icons.
