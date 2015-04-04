@@ -66,7 +66,7 @@ fi
 if [ -e "icon_180x180.png" ]; then
 	echo "icon_180x180.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 120 ${BASE_FILE} --out icon_180x180.png
+	sips -Z 180 ${BASE_FILE} --out icon_180x180.png
 fi
 
 #-----------------------------------
