@@ -180,8 +180,6 @@ cp -vf "icon_180x180.png" "${outdir}/Icon-60@3x.png"
 #-----------------------------------
 # 設定/Spotlight（iOS6以前）
 #-----------------------------------
-# iPhone 6 Plus
-cp -vf "icon_120x120.png" "${outdir}/Icon-60@3x.png"
 # iPad 第3世代
 cp -vf "icon_100x100.png" "${outdir}/Icon-Small-50@2x.png"
 #iPad / iPad2 / iPad mini
