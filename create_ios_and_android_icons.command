@@ -14,9 +14,11 @@ mkdir -p $outdir
 # https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconMatrix.html
 # ですので、このスクリプトでは最低でも、512x512サイズのアイコン画像がないと処理を終了するように修正しました。
 
+# App icon for the App Store (すべてのアプリで必須)
 if [ -e "icon_1024x1024.png" ]; then
 	if [ -e "icon_512x512.png" ]; then
 		echo "icon_512x512.png はすでに存在しています。処理をスキップします。"
+		BASE_FILE="icon_1024x1024.png"
 	else
 		sips -Z 512 icon_1024x1024.png --out icon_512x512.png
 		BASE_FILE="icon_1024x1024.png"
@@ -36,166 +38,177 @@ else
 fi
 
 #----------------------------------------------------------------------
-# アプリアイコン
+# アプリアイコン（ファイル名）
 #----------------------------------------------------------------------
 
-# iPhone 6s Plus and iPhone 6 Plus (@3x) 
-if [ -e "${outdir}/icon@3x _180x180.png" ]; then
-	echo "icon@3x_180x180.png はすでに存在しています。処理をスキップします。"
+echo "BASE_ICON: "
+echo ${BASE_FILE}
+
+# iPhone Spotlight - iOS 5,6　推奨
+#        Settings - iOS 5-9　推奨
+if [ -e "${outdir}/icon-small.png" ]; then
+	echo "icon-small.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 180 ${BASE_FILE} --out ${outdir}/icon@3x_180x180.png
+	sips -Z 29 ${BASE_FILE} --out ${outdir}/icon-small.png
 fi
 
-# iPhone 6s, iPhone 6, and iPhone 5 (@2x)
-# iPhone 4s (@2x)
-if [ -e "${outdir}/icon@2x _120x120.png" ]; then
-	echo "icon@2x _120x120.png はすでに存在しています。処理をスキップします。"
+# iPhone 6s,iPhone 6, and iPhone 5(@2x)　推奨
+# iPhone 4s(@2x)　推奨
+if [ -e "${outdir}/icon-small@2x.png" ]; then
+	echo "icon-small@2x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 120 ${BASE_FILE} --out ${outdir}/icon@2x_120x120.png
+	sips -Z 58 ${BASE_FILE} --out ${outdir}/icon-small@2x.png
 fi
 
-# iPad and iPad mini (@2x)
-if [ -e "${outdir}/icon@2x_152x152.png" ]; then
-	echo "icon@2x_152x152.png はすでに存在しています。処理をスキップします。"
+# iPhone 6s Plus and iPhone 6 Plus (@3x)　推奨
+if [ -e "${outdir}/icon-small@3x.png" ]; then
+	echo "icon-small@3x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 152 ${BASE_FILE} --out ${outdir}/icon@2x_152x152.png
-fi
-
-# iPad 2 and iPad mini (@1x)
-if [  -e "${outdir}/icon@1x_76x76.png"  ]; then
-	echo "icon@1x_76x76.png はすでに存在しています。処理をスキップします。"
-else
-	sips -Z 76 ${outdir}/icon@2x_152x152.png --out ${outdir}/icon@1x_76x76.png
-fi
-
-# iPad Pro (@2x)
-if [ -e "${outdir}/icon@2x_167x167.png" ]; then
-	echo "icon@2x_167x167.png はすでに存在しています。処理をスキップします。"
-else
-	sips -Z 167 ${BASE_FILE} --out ${outdir}/icon@2x_167x167.png
+	sips -Z 87 ${BASE_FILE} --out ${outdir}/icon-small@3x.png
 fi
 
 #----------------------------------------------------------------------
-# Spotlight 検索結果アイコン
-#----------------------------------------------------------------------
-# iPhone 6s Plus and iPhone 6 Plus (@3x) 
-if [ -e "${outdir}/spotlight_icon@3x_180x180.png" ]; then
-	echo "spotlight_icon@3x_180x180.png はすでに存在しています。処理をスキップします。"
+# iPhone Spotlight iOS 7-9
+
+# iPhone 5(@2x)　推奨
+# iPhone 4s(@2x)　推奨
+if [ -e "${outdir}/icon-40@2x.png" ]; then
+	echo "icon-40@2x.png はすでに存在しています。処理をスキップします。"
 else
-	cp -f ${outdir}/icon@3x_180x180.png ${outdir}/spotlight_icon@3x_180x180.png
+	sips -Z 80 ${BASE_FILE} --out ${outdir}/icon-40@2x.png
 fi
 
-# iPhone 6s and iPhone 6 
-# iPad and iPad mini (@2x) 
-if [ -e "${outdir}/spotlight_icon@2x_120x120.png" ]; then
-	echo "spotlight_icon@2x_120x120.png はすでに存在しています。処理をスキップします。"
+# iPhone 6s, iPhone 6(@2x)　推奨
+if [ -e "${outdir}/icon-40@3x.png" ]; then
+	echo "icon-40@3x.png はすでに存在しています。処理をスキップします。"
 else
-	cp -f ${outdir}/icon@3x_120x120.png ${outdir}/spotlight_icon@2x_120x120.png
+	sips -Z 120 ${BASE_FILE} --out ${outdir}/icon-40@3x.png
 fi
 
-# iPhone 5
-#iPhone 4s (@2x) 
-if [ -e "${outdir}/spotlight_icon@2x_80x80.png" ]; then
-	echo "${outdir}/spotlight_icon@2x_80x80.png はすでに存在しています。処理をスキップします。"
+# iPhone App iOS 5,6
+if [ -e "${outdir}/icon.png" ]; then
+	echo "icon.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 80 ${BASE_FILE} --out ${outdir}/spotlight_icon@2x_80x80.png
+	sips -Z 57 ${BASE_FILE} --out ${outdir}/icon.png
 fi
 
-# iPad 2 and iPad mini (@1x) 
-if [ -e "${outdir}/spotlight_icon@1x_60x60.png" ]; then
-	echo "icon@1x_60x60.png はすでに存在しています。処理をスキップします。"
+if [ -e "${outdir}/icon@2x.png" ]; then
+	echo "icon@2x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 60 ${outdir}/icon@2x_120x120.png --out ${outdir}/spotlight_icon@2x_60x60.png
-fi
-
-# iPad Pro (@2x) 
-if [ -e "${outdir}/spotlight_icon@2x_120x120.png" ]; then
-	echo "spotlight_icon@2x_120x120.png はすでに存在しています。処理をスキップします。"
-else
-	cp -f ${outdir}/icon@3x_180x180.png ${outdir}/spotlight_icon@2x_120x120.png	
+	sips -Z 114 ${BASE_FILE} --out ${outdir}/icon@2x.png
 fi
 
 #----------------------------------------------------------------------
-# 設定アイコン
-#----------------------------------------------------------------------
+#iPhone App iOS 7-9
 
-# iPhone 6s Plus and iPhone 6 Plus (@3x) 
-# iPad 2 and iPad mini (@1x) 
-if [ -e "${outdir}/setting_icon@3x_87x87.png" ]; then
-	echo "setting_icon@3x_87x87.png はすでに存在しています。処理をスキップします。"
+# iPhone 6s,iPhone 6, and iPhone 5(@2x)　必須
+# iPhone 4s(@2x)　必須
+if [ -e "${outdir}/icon-60@2x.png" ]; then
+	echo "icon-60@2x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 87 ${BASE_FILE} --out ${outdir}/setting_icon@3x_87x87.png
+	sips -Z 120 ${BASE_FILE} --out ${outdir}/icon-60@2x.png
 fi
 
-# iPhone 6s, iPhone 6, and iPhone 5 (@2x)
-if [ -e "${outdir}/setting_icon@2x_58x58.png" ]; then
-	echo "setting_icon@2x_58x58.png はすでに存在しています。処理をスキップします。"
+# iPhone 6s Plus and iPhone 6 Plus (@3x)　必須
+# iPhone 6s Plus and iPhone 6 Plus (@3x) Spotlight search results icon　推奨
+if [ -e "${outdir}/icon-60@3x.png" ]; then
+	echo "icon-60@3x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 58 ${BASE_FILE} --out ${outdir}/setting_icon@2x_58x58.png
-fi
-
-# iPhone 4s (@2x)
-if [ -e "${outdir}/setting_icon@2x_58x58.png" ]; then
-	echo "setting_icon@2x_58x58.png はすでに存在しています。処理をスキップします。"
-fi
-
-# iPad and iPad mini (@2x)
-if [ -e "${outdir}/setting_icon@2x_58x58.png" ]; then
-	echo "setting_icon@2x_58x58.png はすでに存在しています。処理をスキップします。"
-fi
-
-# iPad 2 and iPad mini (@1x)
-if [ -e "${outdir}/setting_icon@1x_29x29.png" ]; then
-	echo "setting_icon@1x_29x29.png はすでに存在しています。処理をスキップします。"
-else
-	sips -Z 29 ${outdir}/setting_icon@2x_58x58.png  --out ${outdir}/setting_icon@1x_29x29.png
-fi
-
-# iPad Pro (@2x)
-if [ -e "${outdir}/setting_icon@2x_58x58.png" ]; then
-	echo "setting_icon@2x_58x58.png はすでに存在しています。処理をスキップします。"
+	sips -Z 180 ${BASE_FILE} --out ${outdir}/icon-60@3x.png
 fi
 
 #----------------------------------------------------------------------
-# ウェブクリップアイコン
+# iPad Settings iOS 5-9
+
+# iPad 2 and iPad mini(@1x)　推奨
+if [ -e "${outdir}/icon-small.png" ]; then
+	echo "icon-small.png はすでに存在しています。処理をスキップします。"
+else
+	sips -Z 29 ${BASE_FILE} --out ${outdir}/icon-small.png
+fi
+
+# iPad and iPad mini(@2x)　推奨
+# iPad Pro(@2x)　推奨
+if [ -e "${outdir}/icon-small@2x.png" ]; then
+	echo "icon-small@2x.png はすでに存在しています。処理をスキップします。"
+else
+	sips -Z 58 ${BASE_FILE} --out ${outdir}/icon-small@2x.png
+fi
+
 #----------------------------------------------------------------------
+# iPad Spotlight iOS 7-9
 
-# iPhone 6s Plus and iPhone 6 Plus (@3x) 
-if [ -e "${outdir}/webclip_icon@3x_180x180.png" ]; then
-	cp -f ${outdir}/icon@3x_180x180.png ${outdir}/webclip_icon@3x_180x180.png
+# iPad 2 and iPad mini(@1x)　推奨　※ただしドキュメントでは120x120サイズとなっている。
+if [ -e "${outdir}/icon-40.png" ]; then
+	echo "icon-40.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 180 ${BASE_FILE} --out ${outdir}/webclip_icon@3x_180x180.png
+	sips -Z 40 ${BASE_FILE} --out ${outdir}/icon-40.png
 fi
 
-# iPhone 6s, iPhone 6, and iPhone 5 (@2x)
-# iPhone 4s (@2x)
-if [ -e "${outdir}/webclip_icon@2x_120x120.png" ]; then
-	cp -f ${outdir}/icon@2x_120x120.png ${outdir}/webclip_icon@2x_120x120.png
+# iPad and iPad mini(@2x)　推奨　※ただしドキュメントでは180x180サイズとなっている。
+# iPad Pro(@2x)　推奨　※ただしドキュメントでは180x180サイズとなっている。
+if [ -e "${outdir}/icon-40@2x.png" ]; then
+	echo "icon-40@2x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 120 ${BASE_FILE} --out ${outdir}/webclip_icon@2x_120x120.png
+	sips -Z 80 ${BASE_FILE} --out ${outdir}/icon-40@2x.png
 fi
 
-# iPad and iPad mini (@2x)
-if [ -e "${outdir}/webclip_icon@2x_152x152.png" ]; then
-	cp -f ${outdir}/icon@2x_152x152.png ${outdir}/webclip_icon@2x_152x152.png
+#----------------------------------------------------------------------
+# iPad Spotlight iOS 5,6
+
+if [ -e "${outdir}/icon-50.png" ]; then
+	echo "icon-50.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 152 ${BASE_FILE} --out ${outdir}/webclip_icon@2x_152x152.png
+	sips -Z 50 ${BASE_FILE} --out ${outdir}/icon-50.png
 fi
 
-# iPad 2 and iPad mini (@1x)
-if [ -e "${outdir}/webclip_icon(@1x) _76x76.png" ]; then
-	cp -f ${outdir}/icon@1x_76x76.png ${outdir}/webclip_icon@1x_76x76.png
+if [ -e "${outdir}/icon-50@2x.png" ]; then
+	echo "icon-50@2x.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 76 ${BASE_FILE} --out ${outdir}/webclip_icon@1x_76x76.png
+	sips -Z 100 ${BASE_FILE} --out ${outdir}/icon-50@2x.png
 fi
 
-# iPad Pro (@2x)
-if [ -e "${outdir}/webclip_icon@2x_167x167.png" ]; then
-	cp -f ${outdir}/icon@2x_167x167.png ${outdir}/webclip_icon@2x_167x167.png 
+#----------------------------------------------------------------------
+# iPad App iOS 5,6
+
+if [ -e "${outdir}/icon-72.png" ]; then
+	echo "icon-72.png はすでに存在しています。処理をスキップします。"
 else
-	sips -Z 167 ${BASE_FILE} --out ${outdir}/webclip_icon@2x_167x167.png
+	sips -Z 72 ${BASE_FILE} --out ${outdir}/icon-72.png
 fi
 
+if [ -e "${outdir}/icon-72@2x.png" ]; then
+	echo "icon-72@2x.png はすでに存在しています。処理をスキップします。"
+else
+	sips -Z 144 ${BASE_FILE} --out ${outdir}/icon-72@2x.png
+fi
+
+#----------------------------------------------------------------------
+# iPad App iOS 7-9
+
+# iPad 2 and iPad mini(@1x)　必須
+if [ -e "${outdir}/icon-76.png" ]; then
+	echo "icon-76.png はすでに存在しています。処理をスキップします。"
+else
+	sips -Z 76 ${BASE_FILE} --out ${outdir}/icon-76.png
+fi
+
+# iPad and iPad mini(@2x)　必須
+if [ -e "${outdir}/icon-76@2x.png" ]; then
+	echo "icon-76@2x.png はすでに存在しています。処理をスキップします。"
+else
+	sips -Z 152 ${BASE_FILE} --out ${outdir}/icon-76@2x.png
+fi
+
+#----------------------------------------------------------------------
+# iPad Pro App iOS 9
+
+# iPad Pro(@2x)　必須
+if [ -e "${outdir}/icon-83.5@2x.png" ]; then
+	echo "icon-83.5@2x.png はすでに存在しています。処理をスキップします。"
+else
+	sips -Z 167 ${BASE_FILE} --out ${outdir}/icon-83.5@2x.png
+fi
 
 #======================================================================
 # Android
@@ -274,6 +287,3 @@ cp -fv "${outdir}/icon_48x48.png" "${androiddir}/icon.png"
 androiddir="${outdir}/drawable-ldpi"
 mkdir -m a+w -pv $androiddir
 cp -fv "${outdir}/icon_36x36.png" "${androiddir}/icon.png"
-
-
-
